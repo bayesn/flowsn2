@@ -42,8 +42,8 @@ PARAM_NAMES = [
     "tau_hi", "RB_hi",          # only sampled in the dust-step model
 ]
 
-# SN Ia truths in the SAMPLING convention. The tables and figures report gamma
-# with the opposite sign (flowsn2.plotting.SIGN_FLIP), i.e. gamma = -0.1.
+# SN Ia truths. gamma multiplies delta_M = 1 for high-mass hosts (Eq. 11), so
+# gamma = +0.1 makes high-mass hosts 0.1 mag fainter in the main experiments.
 TRUTHS_FIDUCIAL = {
     "M0": -19.380, "Om0": 0.315, "RB": 3.740, "alpha": -0.149,
     "alpha_c": -0.006, "beta_int": 2.322, "beta_rate": 1.5,
@@ -94,7 +94,7 @@ def is_dust_step(cosmo):
 
 
 def resolve_truths(cosmo="cosmo1"):
-    """Truth dict for a cosmology tag (sampling convention)."""
+    """Truth dict for a cosmology tag."""
     truths = dict(TRUTHS_FIDUCIAL)
     truths.update(COSMOLOGIES[base_cosmo(cosmo)])
     if "_dust" in cosmo:

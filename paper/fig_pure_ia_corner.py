@@ -14,7 +14,7 @@ import argparse
 
 import numpy as np
 import corner
-from flowsn2.plotting import use_paper_style, LABELS, LEVELS, flip, normalise_marginals
+from flowsn2.plotting import use_paper_style, LABELS, LEVELS, normalise_marginals
 use_paper_style()
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
@@ -49,7 +49,7 @@ def main():
         if not path.exists():
             raise SystemExit(f"missing {path}")
         z = np.load(path)
-        samples.append({k: flip(k) * np.asarray(z[k]).ravel() for k in z.files})
+        samples.append({k: np.asarray(z[k]).ravel() for k in z.files})
     TRUTHS = resolve_truths(args.cosmo)
 
     SIDE = 10.0
@@ -60,7 +60,7 @@ def main():
     for block, slot in zip(BLOCKS, slots):
         params = [p for p in block if all(p in s for s in samples)]
         data = [np.stack([s[p] for p in params], axis=-1) for s in samples]
-        truths = [flip(p) * TRUTHS[p] + 0.0 for p in params]
+        truths = [TRUTHS[p] for p in params]
         stacked = np.vstack(data)
         lo, hi = stacked.min(axis=0), stacked.max(axis=0)
         ranges = [(a - args.pad * (b - a), b + args.pad * (b - a)) for a, b in zip(lo, hi)]

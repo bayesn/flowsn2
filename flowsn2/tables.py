@@ -6,7 +6,7 @@ Each cell is mean_s(posterior median_s) +/- std_s / sqrt(N) and its pull
 import numpy as np
 
 from .experiments import resolve_truths
-from .plotting import LABELS, PARAM_ORDER, flip, seed_stat, fmt_cell
+from .plotting import LABELS, PARAM_ORDER, seed_stat, fmt_cell
 
 # (block label, base cosmology tag)
 C13 = [(r"\bm{C}_1", "cosmo1"), (r"\bm{C}_2", "cosmo2"), (r"\bm{C}_3", "cosmo3")]
@@ -17,14 +17,14 @@ COND_C45 = [("SN + CMB + BAO", "_cmb_bao")]
 
 
 def point_estimates(paths_by_seed, seeds):
-    """{param: per-seed posterior medians (sign-flipped where reported so)}."""
+    """{param: per-seed posterior medians}."""
     out = {p: [] for p in PARAM_ORDER}
     keys = None
     for s in seeds:
         z = np.load(paths_by_seed[s])
         keys = set(z.files) if keys is None else keys & set(z.files)
         for p in PARAM_ORDER:
-            out[p].append(flip(p) * float(np.median(np.asarray(z[p]).ravel()))
+            out[p].append(float(np.median(np.asarray(z[p]).ravel()))
                           if p in z.files else np.nan)
     return {p: np.asarray(v) for p, v in out.items()}, keys
 
@@ -69,7 +69,7 @@ def build_table(blocks, conditions, series, find_files, caption, label, seeds):
                   + " & ".join(" & ".join(h for h, _ in series) for _ in conditions) + r" \\",
                   r"\hline"]
         for p in present:
-            t = flip(p) * truths[p] + 0.0        # + 0.0 keeps a flipped zero unsigned
+            t = truths[p]
             cells = [LABELS.get(p, p), f"{t:g}"]
             for clabel, _ in conditions:
                 if data[clabel] is None:

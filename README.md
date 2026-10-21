@@ -1,10 +1,14 @@
-# FlowSN2
+# *FlowSN2*
 
-Code for **FlowSN2: Dusty Supernova Cosmology with Photometric Redshifts and
-Contamination using Neural Simulation-Based Inference** (Boyd, Autenrieth, Mandel,
-Grayling, Ginolin, Kelsey & Thorp).
+Code accompanying:
 
-FlowSN2 is a modular simulation-based inference framework for photometric SN Ia
+> B. M. Boyd, M. Autenrieth, K. S. Mandel, M. Grayling, M. Ginolin, L. Kelsey and
+> S. Thorp, *FlowSN2: Dusty Supernova Cosmology with Photometric Redshifts and
+> Contamination using Neural Simulation-Based Inference* (2026).
+
+If you use this code, please cite the paper above.
+
+*FlowSN2* is a modular simulation-based inference framework for photometric SN Ia
 cosmology. A hierarchical Bayesian model keeps the cosmology, the SN Ia rate and
 the Dusty Simple-BayeSN population analytical. Two normalising flows per survey
 learn what cannot be written down:
@@ -162,9 +166,9 @@ Modifiers:
 - `cosmo1_dustnull` and `cosmo1_dust` are the model-comparison simulations. High-mass hosts have τ = 0.098 and R_B = 3.0, and the intrinsic step is γ = 0 or γ = −0.06 respectively.
 
 A modified tag analyses exactly the same SNe as its base cosmology. The SN
-population truths are those of Tables 1 and E1. γ is sampled with the opposite
-sign to the one the tables and figures report, so the code's γ = +0.1 is the
-paper's −0.1.
+population truths are those of Tables 1 and E1. γ multiplies δ = 1 for high-mass
+hosts (Eq. 11), so the main experiments' γ = +0.1 makes high-mass hosts 0.1 mag
+fainter; tables and figures report γ exactly as sampled.
 
 ### Contamination analyses
 
@@ -187,7 +191,7 @@ paper's −0.1.
 
 ## Acknowledgements
 
-FlowSN2 builds on [FlowJAX](https://github.com/danielward27/flowjax),
+*FlowSN2* builds on [FlowJAX](https://github.com/danielward27/flowjax),
 [numpyro](https://github.com/pyro-ppl/numpyro), [JAX](https://github.com/jax-ml/jax)
 and [wcosmo](https://github.com/ColmTalbot/wcosmo). The `wcosmo/` directory is
 the copy used for the paper's runs: wcosmo 0.5.0 (MIT licence, included) with

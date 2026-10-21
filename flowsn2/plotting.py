@@ -17,18 +17,10 @@ PARAM_ORDER = ['w0', 'wa', 'Om0', 'M0', 'alpha', 'beta_int', 'alpha_c', 'RB',
                'c0_int', 'sigma_int', 'sigma_c', 'sigma_x', 'tau', 'x0',
                'beta_rate', 'gamma']
 
-# gamma is reported with the opposite sign to the sampling convention: samples
-# AND truths are negated, so means and pulls flip while errors are unchanged.
-SIGN_FLIP = {'gamma': -1.0}
-
 # 1, 2 and 3 sigma enclosed probabilities in two dimensions
 LEVELS = (1 - np.exp(-0.5), 1 - np.exp(-2.0), 1 - np.exp(-4.5))
 
 PAPER_SEEDS = "0-24"     # the 25 realisations behind every table and coverage panel
-
-
-def flip(p):
-    return SIGN_FLIP.get(p, 1.0)
 
 
 def use_paper_style():

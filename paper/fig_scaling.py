@@ -13,7 +13,7 @@ import argparse
 import numpy as np
 import corner
 from scipy.ndimage import gaussian_filter
-from flowsn2.plotting import (use_paper_style, LABELS, LEVELS, flip, block_decimals,
+from flowsn2.plotting import (use_paper_style, LABELS, LEVELS, block_decimals,
                               format_pdg)
 use_paper_style()
 from matplotlib.lines import Line2D
@@ -111,14 +111,14 @@ def main():
         if not path.exists():
             raise SystemExit(f"missing pooled posterior: {path}")
         with np.load(path) as archive:
-            sample = {k: flip(k) * np.asarray(archive[k]).ravel() for k in archive.files}
+            sample = {k: np.asarray(archive[k]).ravel() for k in archive.files}
         loaded.append((scale, sample, colour))
 
     params = args.params
     samples = []
     for _, sample, _ in loaded:
         samples.append({p: sample[p][np.isfinite(sample[p])] for p in params})
-    truths = {k: flip(k) * v + 0.0 for k, v in resolve_truths(args.cosmo).items()}
+    truths = resolve_truths(args.cosmo)
     ranges = common_ranges(samples, params, truths)
 
     fig = None
