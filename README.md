@@ -183,14 +183,6 @@ samples are written; the chains themselves are unchanged.
 | `bayes_resample<m>.npz` | label allocation m ~ Bernoulli(classification score) |
 | `bayes_resample_pooled.npz` | modular Bayesian posterior: all allocations pooled (Eq. 26) |
 
-## Seeds and reproducibility
-
-- **Pure SN Ia catalogue:** `PRNGKey(seed + 10^6 × block)`, where the block is 0–4 for C1–C5. The CMB and BAO observations are drawn from that key folded with 777 and 999. Every engine, and every modifier of a cosmology, therefore sees the same data.
-- **Contaminated catalogue:** `PRNGKey(900000000 + seed)`. The MCMC keys are folded from it: 1 for all objects, 2 for pure SN Ia, 1000 + m for resample m. The resamples are independent of each other and of how many are run.
-- **MCMC initialisation:** a fixed set of hand-chosen values (`experiments.INIT_FIXED`). For the `_cmb`/`_bao` runs, the cosmology starts at the maximum of the CMB/BAO likelihood; the truths are never used.
-- **C1 SN-only resamples:** the published C1 SN-only contamination column pooled M = 10 resamples per seed; all other runs pooled M = 5. `submit_paper.sh` reproduces this. The first five resamples are the same whichever M is used.
-- **Bit-level reproduction:** reproducing the chains to the last bit needs the pinned environment and the same kind of GPU. XLA reductions can differ in the final bit between hardware platforms, and NUTS amplifies such differences over a long chain.
-
 ## Acknowledgements
 
 *FlowSN2* builds on [FlowJAX](https://github.com/danielward27/flowjax),
