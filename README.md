@@ -3,7 +3,7 @@
 Code accompanying:
 
 > B. M. Boyd, M. Autenrieth, K. S. Mandel, M. Grayling, M. Ginolin, L. Kelsey and
-> S. Thorp, *FlowSN2: Dusty Supernova Cosmology with Photometric Redshifts and
+> S. Thorp, *2Flow2SN: Dusty Supernova Cosmology with Photometric Redshifts and
 > Contamination using Neural Simulation-Based Inference* (2026).
 
 If you use this code, please cite the paper above.
