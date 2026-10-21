@@ -166,9 +166,11 @@ Modifiers:
 - `cosmo1_dustnull` and `cosmo1_dust` are the model-comparison simulations. High-mass hosts have τ = 0.098 and R_B = 3.0, and the intrinsic step is γ = 0 or γ = −0.06 respectively.
 
 A modified tag analyses exactly the same SNe as its base cosmology. The SN
-population truths are those of Tables 1 and E1. γ multiplies δ = 1 for high-mass
-hosts (Eq. 11), so the main experiments' γ = +0.1 makes high-mass hosts 0.1 mag
-fainter; tables and figures report γ exactly as sampled.
+population truths are those of Tables 1 and E1. The simulator and likelihoods add
+γ δ to the magnitude (δ = 1 for high-mass hosts) with a simulated γ = +0.1. The
+saved samples, tables and figures carry the opposite sign of γ, reporting it as
+−0.1 as in the paper (`experiments.to_reported`). This only relabels γ when
+samples are written; the chains themselves are unchanged.
 
 ### Contamination analyses
 

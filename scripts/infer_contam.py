@@ -141,7 +141,9 @@ if do_reference or reps_to_run:
         print(f"\n=== {name} ({n_in} objects included) ===")
         mcmc.run(key, include=include, **run_kwargs)
         mcmc.print_summary()
-        np.savez_compressed(path, **{k: np.asarray(v) for k, v in mcmc.get_samples().items()})
+        # gamma is saved in the paper's reporting convention (experiments.to_reported)
+        np.savez_compressed(path, **ex.to_reported(
+            {k: np.asarray(v) for k, v in mcmc.get_samples().items()}))
 
     if do_reference:
         fit("all_objects", [np.ones_like(q) for q in scores], random.fold_in(mcmc_key, 1))

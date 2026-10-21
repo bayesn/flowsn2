@@ -19,7 +19,7 @@ use_paper_style()
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-from flowsn2.experiments import resolve_truths
+from flowsn2.experiments import reported_truths
 from flowsn2.paths import pure_ia_dir, FIGURES
 
 # (legend label, engine, colour, linewidth), in DRAWING order
@@ -50,7 +50,7 @@ def main():
             raise SystemExit(f"missing {path}")
         z = np.load(path)
         samples.append({k: np.asarray(z[k]).ravel() for k in z.files})
-    TRUTHS = resolve_truths(args.cosmo)
+    TRUTHS = reported_truths(args.cosmo)
 
     SIDE = 10.0
     fig = plt.figure(figsize=(2 * SIDE, 2 * SIDE))

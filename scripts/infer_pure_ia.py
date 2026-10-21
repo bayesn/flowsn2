@@ -74,5 +74,7 @@ mcmc = MCMC(NUTS(model, init_strategy=init_to_value(values=init),
 mcmc.run(mcmc_key, grouped_data=grouped_data, w0wa=w0wa, cmb=cmb, bao_obs=bao_obs,
          sigma_pec=args.sigma_pec)
 mcmc.print_summary()
-np.savez_compressed(npz_path, **mcmc.get_samples())
+# gamma is saved in the paper's reporting convention (experiments.to_reported)
+np.savez_compressed(npz_path, **ex.to_reported(
+    {k: np.asarray(v) for k, v in mcmc.get_samples().items()}))
 print(f"Saved: {npz_path}")

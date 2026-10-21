@@ -18,7 +18,7 @@ from flowsn2.plotting import (use_paper_style, LABELS, LEVELS, block_decimals,
 use_paper_style()
 from matplotlib.lines import Line2D
 
-from flowsn2.experiments import resolve_truths
+from flowsn2.experiments import reported_truths
 from flowsn2.paths import contam_dir, FIGURES
 
 DEFAULT_PARAMS = ["w0", "Om0", "alpha", "beta_int", "beta_rate"]
@@ -118,7 +118,7 @@ def main():
     samples = []
     for _, sample, _ in loaded:
         samples.append({p: sample[p][np.isfinite(sample[p])] for p in params})
-    truths = resolve_truths(args.cosmo)
+    truths = reported_truths(args.cosmo)
     ranges = common_ranges(samples, params, truths)
 
     fig = None

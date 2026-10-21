@@ -20,7 +20,7 @@ use_paper_style()
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-from flowsn2.experiments import resolve_truths
+from flowsn2.experiments import reported_truths
 from flowsn2.paths import CONTAM, FIGURES
 
 PARAM_ORDER = ['w0', 'wa', 'Om0', 'M0', 'beta_rate', 'alpha', 'beta_int', 'alpha_c',
@@ -58,7 +58,7 @@ def main():
         creds = {p: [] for p in PARAM_ORDER}
         N = 0
         for cosmo in cosmos:
-            truths = resolve_truths(cosmo)
+            truths = reported_truths(cosmo)
             for d in sorted((CONTAM / "flow" / cosmo).glob("seed*")):
                 m = re.fullmatch(r"seed(\d+)", d.name)
                 if not m or int(m.group(1)) not in want:

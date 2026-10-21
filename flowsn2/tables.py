@@ -5,7 +5,7 @@ Each cell is mean_s(posterior median_s) +/- std_s / sqrt(N) and its pull
 """
 import numpy as np
 
-from .experiments import resolve_truths
+from .experiments import reported_truths
 from .plotting import LABELS, PARAM_ORDER, seed_stat, fmt_cell
 
 # (block label, base cosmology tag)
@@ -58,7 +58,7 @@ def build_table(blocks, conditions, series, find_files, caption, label, seeds):
             data[clabel] = ests
         if present is None:
             continue
-        truths = resolve_truths(base)
+        truths = reported_truths(base)
 
         lines += [r"\hline", rf"\multicolumn{{{ncol}}}{{c}}{{Cosmology ${block_label}$}} \\",
                   r"\hline",

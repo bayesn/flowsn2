@@ -17,7 +17,7 @@ from flowsn2.plotting import (use_paper_style, LABELS, LEVELS, normalise_margina
 use_paper_style()
 from matplotlib.lines import Line2D
 
-from flowsn2.experiments import resolve_truths
+from flowsn2.experiments import reported_truths
 from flowsn2.paths import contam_dir, FIGURES
 
 # (legend label, samples file, colour, linewidth), in DRAWING order
@@ -50,7 +50,7 @@ def main():
         samples.append({k: np.asarray(z[k]).ravel() for k in z.files})
 
     params = [p for p in args.params if all(p in s for s in samples)]
-    TRUTHS = resolve_truths(args.cosmo)
+    TRUTHS = reported_truths(args.cosmo)
     truths = [TRUTHS[p] for p in params]
     data = [np.stack([s[p] for p in params], axis=-1) for s in samples]
 

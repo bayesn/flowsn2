@@ -42,8 +42,8 @@ PARAM_NAMES = [
     "tau_hi", "RB_hi",          # only sampled in the dust-step model
 ]
 
-# SN Ia truths. gamma multiplies delta_M = 1 for high-mass hosts (Eq. 11), so
-# gamma = +0.1 makes high-mass hosts 0.1 mag fainter in the main experiments.
+# SN Ia truths in the simulator's convention (m += gamma * delta_M). Saved
+# samples and reports use the opposite sign of gamma -- see to_reported().
 TRUTHS_FIDUCIAL = {
     "M0": -19.380, "Om0": 0.315, "RB": 3.740, "alpha": -0.149,
     "alpha_c": -0.006, "beta_int": 2.322, "beta_rate": 1.5,
@@ -94,13 +94,32 @@ def is_dust_step(cosmo):
 
 
 def resolve_truths(cosmo="cosmo1"):
-    """Truth dict for a cosmology tag."""
+    """Truth dict for a cosmology tag, in the simulator's convention."""
     truths = dict(TRUTHS_FIDUCIAL)
     truths.update(COSMOLOGIES[base_cosmo(cosmo)])
     if "_dust" in cosmo:
         truths.update(DUST_STEP_TRUTHS)
         truths["gamma"] = 0.0 if "_dustnull" in cosmo else GAMMA_ALT
     return truths
+
+
+# Reporting convention. The simulator and likelihoods add gamma * delta_M to the
+# magnitude; saved samples, tables and figures carry the opposite sign, so the
+# main experiments' simulated gamma = +0.1 is reported as -0.1, as in the paper.
+# This is a relabelling applied only when samples are written: the chains are
+# unchanged, and the uniform prior on gamma is symmetric.
+REPORTED_FLIPPED = ("gamma",)
+
+
+def to_reported(params):
+    """Copy of a dict of samples or truths in the reporting convention
+    (+ 0.0 turns a negated zero into +0)."""
+    return {k: (-v + 0.0 if k in REPORTED_FLIPPED else v) for k, v in params.items()}
+
+
+def reported_truths(cosmo="cosmo1"):
+    """Truths in the convention of the saved samples (for tables and figures)."""
+    return to_reported(resolve_truths(cosmo))
 
 
 # Per-cosmology PRNG block: each cosmology draws an independent realisation at
