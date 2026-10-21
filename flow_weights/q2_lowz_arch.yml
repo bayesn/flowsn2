@@ -1,0 +1,4 @@
+cond_dim: 10
+nn_depth: 2
+nn_width: 16
+no_flows: 2

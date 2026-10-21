@@ -1,0 +1,5 @@
+nn_depth: 2
+nn_width: 64
+no_flows: 4
+pec_shear: false
+sigma_pec: 300.0

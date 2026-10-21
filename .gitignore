@@ -1,0 +1,13 @@
+# generated data and outputs (see README)
+results/
+training_data/
+figs/
+tables/
+slurm_logs/
+
+# python / tooling
+__pycache__/
+*.egg-info/
+.ipynb_checkpoints/
+.DS_Store
+.vscode/

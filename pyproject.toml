@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flowsn2"
+version = "1.0.0"
+description = "FlowSN2: modular simulation-based inference for photometric SN Ia cosmology"
+readme = "README.md"
+requires-python = ">=3.10"
+# Exact versions are pinned in environment.yml; this list is only what the code imports.
+dependencies = [
+    "jax", "numpyro", "flowjax", "equinox", "paramax", "jaxtyping", "optax",
+    "numpy", "scipy", "matplotlib", "corner", "pyyaml",
+    "array-api-compat", "plum-dispatch",
+]
+
+[tool.setuptools.packages.find]
+include = ["flowsn2*", "wcosmo*"]
