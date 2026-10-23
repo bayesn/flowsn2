@@ -4,9 +4,24 @@ Code accompanying:
 
 > B. M. Boyd, M. Autenrieth, K. S. Mandel, M. Grayling, M. Ginolin, L. Kelsey and
 > S. Thorp, *2Flow2SN: Dusty Supernova Cosmology with Photometric Redshifts and
-> Contamination using Neural Simulation-Based Inference* (2026).
+> Contamination using Neural Simulation-Based Inference*, 2026,
+> [arXiv:2610.30244](https://arxiv.org/abs/2610.30244).
 
-If you use this code, please cite the paper above.
+If you use this code, please cite:
+
+```bibtex
+@article{Boyd2026,
+  author        = {Boyd, Benjamin M. and Autenrieth, Maximilian and Mandel, Kaisey S. and
+                   Grayling, Matthew and Ginolin, Madeleine and Kelsey, Lisa and Thorp, Stephen},
+  title         = {{2Flow2SN: Dusty Supernova Cosmology with Photometric Redshifts and
+                   Contamination using Neural Simulation-Based Inference}},
+  year          = {2026},
+  eprint        = {2610.30244},
+  archivePrefix = {arXiv},
+  primaryClass  = {astro-ph.CO},
+  url           = {https://arxiv.org/abs/2610.30244}
+}
+```
 
 *FlowSN2* is a modular simulation-based inference framework for photometric SN Ia
 cosmology. A hierarchical Bayesian model keeps the cosmology, the SN Ia rate and
